@@ -3,7 +3,8 @@
 
 {% for product in products %}
 
-{{ product.name }}
+<a href="{% url 'view_product' id1=product.id %}">{{ product.name }}</a>
+
 {{ product.price_in_cents }}
 {{ product.description }}
 
