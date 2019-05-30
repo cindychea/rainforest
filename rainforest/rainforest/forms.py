@@ -10,8 +10,9 @@ class ProductForm(ModelForm):
     max_validator = MaxLengthValidator(50,message='500! too long')
     class Meta:
         model = Product
-        fields = ['name', 'description', 'price_in_cents']
+        fields = ['id', 'name', 'description', 'price_in_cents']
 
+    id = forms.HiddenInput()
     name = forms.CharField()
     description = forms.CharField(validators=[min_validator, max_validator])
     price_in_cents = forms.IntegerField()
