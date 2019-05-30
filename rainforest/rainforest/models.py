@@ -5,4 +5,5 @@ class Product(models.Model):
     description = models.TextField()
     price_in_cents = models.IntegerField()
 
-    
+    def __str__(self):
+        return self.name
