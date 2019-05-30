@@ -1,5 +1,7 @@
 {% extends 'base.html'%}
 {% block content %}
+<a href="{% url 'view_product' id=product_id %}">Return without editing</a>
+
 {{ error_msg }}
 <form method='post' action="{% url 'update_product' id=product_id %}">
 {% csrf_token %}
