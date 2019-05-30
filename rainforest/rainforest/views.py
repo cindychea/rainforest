@@ -62,4 +62,9 @@ def update_product(request, id):
             'error_msg': 'You have invalid form, try again!'
         })
 
-
+def delete_product(request, id):
+    product = Product.objects.get(id=id)
+    product.delete()
+    context = {'delete_msg': f'You have deleted {product.name}'}
+    response = render(request, 'index.html', context)
+    return HttpResponseRedirect(response)

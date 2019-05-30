@@ -1,5 +1,12 @@
 {% extends 'base.html'%}
 {% block content %}
+
+<form method='post' action="{% url 'delete_product' id=product.id %}">
+    {% csrf_token %}
+    <input type='submit', value="delete">
+    </form>
+    
+
 <a href="{% url 'edit_product' id=product.id %}">Edit self</a>
 {{ product.id }} <br>
 {{ product.name }} <br>
@@ -7,3 +14,6 @@
 {{ product.price_in_cents }}
 
 {% endblock %}
+
+
+
