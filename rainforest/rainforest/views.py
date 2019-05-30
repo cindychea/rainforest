@@ -26,9 +26,18 @@ def new_product(request):
 
 def create_product(request):
     new_product = ProductForm(request.POST)
-    new_product.save()
+    if(new_product.is_valid()):
+        new_product.save()
+        return HttpResponseRedirect('/')
+    else:
+        product_form = ProductForm()
+        context = {'product_form': product_form, 'error_msg': 'You have invalid form, try again!'}
+        response = render(request, 'new_product.html', context)
+        return HttpResponse(response)
+
+
     # redirect()
-    return HttpResponseRedirect('/')
+    
     # request.POST
 
 

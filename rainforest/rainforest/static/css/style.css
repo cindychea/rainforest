@@ -3,6 +3,11 @@
 }
 .main{
     display: grid;
+    grid-column: 1fr 1fr;
+}
+
+.product{
+    
 }
 .nav{
     background-color: aliceblue;
