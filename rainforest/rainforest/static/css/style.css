@@ -1,8 +1,11 @@
 .body{
 
 }
+.main{
+    display: grid;
+}
 .nav{
     background-color: aliceblue;
     text-align: center;
-    
+
 }
