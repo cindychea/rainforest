@@ -6,7 +6,7 @@ from rainforest.models import *
 from rainforest.forms import *
 
 def root(request):
-    products =  Product.objects.all()
+    products = Product.objects.all()
     context = {'products': products}
     response = render(request, 'index.html', context)
     return HttpResponse(response) 
@@ -47,7 +47,7 @@ def update_product(request):
     # updated_product = ProductForm(request.POST)
     if(updated_product.is_valid()):
         updated_product.save()
-        return redirect('view_product',id=request.POST['id'])
+        return redirect('view_product', id=request.POST['id'])
         # return HttpResponseRedirect('/')
     else:
         product_to_edit = Product.objects.get(id=request.POST['id'])
