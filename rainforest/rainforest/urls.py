@@ -19,7 +19,7 @@ from rainforest.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', root),
+    path('', root, name='home'),
     path('product/<int:id1>', view_product, name='view_product'),
     
     
