@@ -1,4 +1,8 @@
 {
+<<<<<<< HEAD
     "python.pythonPath": "/home/hassan/.pyenv/versions/rainforest/bin/python",
     "python.linting.pylintEnabled": false
+=======
+    "python.pythonPath": "/Users/cindychea/.pyenv/versions/rainforest/bin/python"
+>>>>>>> 3dc0c8e9981b36a551c2e92d1ac162c43dc20df3
 }
