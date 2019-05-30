@@ -1,1 +1,10 @@
 <h1>This is the product page</h1>
+
+
+{% for product in products %}
+
+{{ product.name }}
+{{ product.price_in_cents }}
+{{ product.description }}
+
+{% endfor %}
