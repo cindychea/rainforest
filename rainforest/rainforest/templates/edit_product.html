@@ -1,8 +1,7 @@
 {% extends 'base.html'%}
 {% block content %}
-
-{{error_msg}}
-<form method='post' action="{% url 'update_product'%}">
+{{ error_msg }}
+<form method='post' action="{% url 'update_product' id=product_id %}">
 {% csrf_token %}
 {{ product_form }}
 <input type='submit'>

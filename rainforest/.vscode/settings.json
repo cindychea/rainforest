@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/home/hassan/.pyenv/versions/rainforest/bin/python"
+    "python.pythonPath": "/home/hassan/.pyenv/versions/rainforest/bin/python",
+    "python.linting.pylintEnabled": false
 }

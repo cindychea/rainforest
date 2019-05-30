@@ -11,12 +11,9 @@ def root(request):
     response = render(request, 'index.html', context)
     return HttpResponse(response) 
 
-def view_product(request, id1):
-    
-    product = Product.objects.get(id=id1)
-    context = {'product': product}
-    response = render(request, 'product.html', context)
-    return HttpResponse(response)
+def view_product(request, id):
+    product = Product.objects.get(id=id)
+    return render(request, 'product.html', {'product': product})
 
 def new_product(request):
     product_form = ProductForm()
@@ -36,28 +33,33 @@ def create_product(request):
         return HttpResponse(response)
 
 def edit_product(request, id):
-    product_to_edit = Product.objects.get(id=id)
-    product_form = ProductForm(instance=product_to_edit)
-    context = {'product_form': product_form}
-    response = render(request, 'edit_product.html', context)
-    return HttpResponse(response)
+    product = Product.objects.get(id=id)
+    product_form = ProductForm(instance=product)
 
-def update_product(request):
-    updated_product = ProductForm(instance=None)
-    # updated_product = ProductForm(request.POST)
-    if(updated_product.is_valid()):
-        updated_product.save()
-        return redirect('view_product',id=request.POST['id'])
-        # return HttpResponseRedirect('/')
+    return render(request, 'edit_product.html', {
+        'product_form': product_form,
+        'product_id': id
+    })
+
+def update_product(request, id):
+    product = Product.objects.get(id=id)
+    product_form = ProductForm(request.POST, instance=product)
+
+    # Get the product by id (from parameter in url)
+    # Find the instance
+    # If instance changes are valid
+    #   save and redirect
+    # else
+    #   re-render the form with the values and the error message
+
+    if product_form.is_valid():
+        product_form.save()
+        return redirect('view_product', id=id) # Instance or not?
     else:
-        product_to_edit = Product.objects.get(id=request.POST['id'])
-        product_form = ProductForm(instance=product_to_edit)
-        context = {'product_form': product_form, 'error_msg': 'You have invalid form, try again!'}
-        response = render(request, 'edit_product.html', context)
-        return HttpResponse(response)
-
-    # redirect()
-    
-    # request.POST
+        return render(request, 'edit_product.html', {
+            'product_form': product_form,
+            'product_id': id,
+            'error_msg': 'You have invalid form, try again!'
+        })
 
 
