@@ -14,4 +14,7 @@ class Product(models.Model):
         dollars = self.price_in_cents / 100
         return "${:.2f}".format(dollars)
 
-    
+class Review(models.Model):
+    name = models.CharField(max_length = 255)
+    comment = models.TextField() 
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
