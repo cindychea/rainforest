@@ -5,7 +5,6 @@
     {% csrf_token %}
     <input type='submit', value="delete">
     </form>
-    
 
 <a href="{% url 'edit_product' id=product.id %}">Edit self</a>
 {{ product.id }} <br>
@@ -13,10 +12,22 @@
 {{ product.description }} <br>
 {{ product.price_in_dollars }}
 
+{{error_msg}}
+
+<form method='post' action="{% url 'new_review' id=product.id %}">
+    {% csrf_token %}
+    <h2>Add Review:</h2>
+    {{ review_form }}
+
+    
+    <input type='submit'>
+    </form>
+
+
 <h3>Reviews</h3>
 <ul>
     {% for review in product.reviews.all %}
-    <li>{{ review.name }}: {{ review.comment }}</li>
+    <li>{{ review.name }}: {{ review.comment }} <a href="{% url 'edit_review' id=product.id review_id=review.id %}">Edit review</a></li> 
     {% endfor %}
 </ul>
 

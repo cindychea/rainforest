@@ -3,7 +3,7 @@ from django import forms
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 
 # from django.models import ModelForm
-from rainforest.models import Product
+from rainforest.models import Product, Review
 
 class ProductForm(ModelForm):
     min_validator = MinLengthValidator(10)
@@ -16,6 +16,15 @@ class ProductForm(ModelForm):
     class Meta:
         model = Product
         fields = ['name', 'description', 'price_in_cents']
+
+class ReviewForm(ModelForm):
+    name = forms.CharField(max_length = 255)
+    comment = forms.CharField()
+
+    class Meta:
+        model = Review
+        fields = ['name', 'comment']
+
 
     
         

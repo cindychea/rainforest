@@ -1,5 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from datetime import date
 from django.forms import ModelForm
 from rainforest.models import *
@@ -13,7 +14,9 @@ def root(request):
 
 def view_product(request, id):
     product = Product.objects.get(id=id)
-    return render(request, 'product.html', {'product': product})
+    review_form = ReviewForm(use_required_attribute=False)
+    context = {'product': product, 'review_form': review_form}
+    return render(request, 'product.html', context)
 
 def new_product(request):
     product_form = ProductForm()
@@ -68,3 +71,41 @@ def delete_product(request, id):
     # context = {'delete_msg': f'You have deleted {product.name}'}
     # response = render(request, 'index.html', context)
     return HttpResponseRedirect('/')
+
+# def review_form(request,id):
+#     review_form = ReviewForm()
+#     context = {'review_form': review_form}
+#     response = render(request, 'new_review.html', context)
+#     return HttpResponse(response)
+
+def new_review(request, id):
+    product = Product.objects.get(id=id)
+    form = ReviewForm(request.POST, use_required_attribute=False)
+    print(request.POST)
+    if form.is_valid():
+        review = form.instance
+        review.product = Product.objects.get(id=id)
+        review.save()
+        return redirect('view_product', id=id)
+    else:
+        context = {'error_msg': 'You have invalid form, try again!', 'product': product, 'review_form': form}
+        response = render(request, 'product.html', context)
+        return HttpResponse(response)
+
+def edit_review(request, id, review_id):
+    product = Product.objects.get(id=id)
+    review = Review.objects.get(id=review_id)
+    form = ReviewForm(request.POST, instance=review)
+    if form.is_valid():
+        form.save()
+        return redirect('view_product', id=id)
+    else:
+        return render(request, 'edit_review.html', {
+            'review_form': form,
+            'product_id': id, 
+            'review_id': review_id,
+            'product': product,
+            'review': review,
+            'error_msg': 'You have invalid form, try again!'
+        })
+

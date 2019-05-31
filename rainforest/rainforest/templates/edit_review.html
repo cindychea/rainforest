@@ -1,0 +1,13 @@
+{% extends 'base.html'%}
+{% block content %}
+<a href="{% url 'view_product' id=product_id %}">Return without editing</a>
+
+{{ error_msg }}
+<form method='post' action="{% url 'edit_review' id=product_id review_id=review_id %}">
+{% csrf_token %}
+{{ review_form }}
+<input type='submit'>
+</form>
+
+
+{% endblock %}

@@ -19,6 +19,7 @@
             <a href="{% url 'view_product' id=product.id %}">{{ product.name }}</a>
             <p>{{ product.price_in_dollars }}</p>
             <p> {{ product.description }}</p>
+            <p>Reviews: {{ product.reviews.count }}</p>
             <br>
         </div>
 
