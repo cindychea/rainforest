@@ -113,7 +113,7 @@ def edit_review(request, id, review_id):
         })
 
 
-def delete_review(request, review_id):
+def delete_review(request, id, review_id):
     review = Review.objects.get(id=review_id)
     review.delete()
     # context = {'delete_msg': f'You have deleted {product.name}'}
