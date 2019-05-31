@@ -16,7 +16,8 @@
 <h3>Reviews</h3>
 <ul>
     {% for review in product.reviews.all %}
-    <li>{{ review }}</li>
+    <li>{{ review.name }}: {{ review.comment }}</li>
+    {% endfor %}
 </ul>
 
 {% endblock %}
