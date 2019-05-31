@@ -1,5 +1,10 @@
 {% extends 'base.html'%}
 {% block content %}
+
+<form method='post' action="{% url 'delete_review' id=product_id review_id=review_id %}">
+    {% csrf_token %}
+    <input type='submit', value="delete review">
+    </form>
 <a href="{% url 'view_product' id=product_id %}">Return without editing</a>
 
 {{ error_msg }}

@@ -95,7 +95,10 @@ def new_review(request, id):
 def edit_review(request, id, review_id):
     product = Product.objects.get(id=id)
     review = Review.objects.get(id=review_id)
+
     form = ReviewForm(request.POST, instance=review)
+    print('review::', review, '\n form::', form)
+
     if form.is_valid():
         form.save()
         return redirect('view_product', id=id)
@@ -108,4 +111,12 @@ def edit_review(request, id, review_id):
             'review': review,
             'error_msg': 'You have invalid form, try again!'
         })
+
+
+def delete_review(request, review_id):
+    review = Review.objects.get(id=review_id)
+    review.delete()
+    # context = {'delete_msg': f'You have deleted {product.name}'}
+    # response = render(request, 'index.html', context)
+    return HttpResponseRedirect('/')
 
